@@ -15,10 +15,18 @@ function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to='/add'>Add Products</Link>
-            <Link to='/update'>Update Products</Link>
-            <Link to='/login'>Login</Link>
-            <Link to='/register'>Register</Link>
+            {
+              localStorage.getItem('user-info') ?
+              <>
+                <Link to='/add'>Add Products</Link>
+                <Link to='/update'>Update Products</Link>
+              </>
+              :
+              <>
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+              </>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

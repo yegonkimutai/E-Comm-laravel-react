@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Header from './Header'
 
 function Register() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(localStorage.getItem('user-info')) {
+      navigate('/add')
+    }
+  }, [])
 
   const BASE_URL = 'http://localhost:8000/api/register'
 
@@ -27,6 +34,8 @@ function Register() {
   }
 
   return (
+    <>
+    <Header />
     <div className='col-sm-6 offset-sm-3'>
       <h1>Registration Page</h1>
       <input 
@@ -52,6 +61,7 @@ function Register() {
       <br />
       <button className='btn btn-primary' onClick={signUp}>Sign Up</button>
     </div>
+    </>
   )
 }
 
