@@ -5,6 +5,7 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Update from './components/Update'
 import Protected from './components/Protected';
+import List from './components/List';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/update' element={<Protected Cmp={Update}/>} />
+          <Route path='/' element={<Protected Cmp={List}/>} />
         </Routes>
       </BrowserRouter>
     </div>
