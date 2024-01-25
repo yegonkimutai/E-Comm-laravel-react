@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 function List() {
     const[data, setData] = useState([])
 
     const BASE_URL = 'http://localhost:8000/api/list'
 
+    async function fetchData() {
+      try {
+        let result = await fetch(BASE_URL);
+        let res = await result.json();
+        setData(res);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
     useEffect(() => {
-        async function fetchData() {
-            try {
-              let result = await fetch(BASE_URL);
-              let res = await result.json();
-              setData(res);
-            } catch (error) {
-              console.error('Error fetching data:', error);
-            }
-          }
-        
           fetchData();
     }, [])
+
+    const deleteProduct = async(id) => {
+      let result = await fetch('http://localhost:8000/api/delete/' + id, {
+        method: 'DELETE'
+      })
+
+      result = await result.json();
+      console.log(result)
+      fetchData()
+    }
 
   return (  
     <div>
@@ -33,6 +43,7 @@ function List() {
                 <td>Price</td>
                 <td>Description</td>
                 <td>Image</td>
+                <td>Operations</td>
             </tr>
             {
                 data.map((item) => 
@@ -41,7 +52,10 @@ function List() {
                     <td>{item.name}</td>
                     <td>{item.price}</td>
                     <td>{item.description}</td>
-                    <td><img style={{width:120}} src={'http://localhost:8000/' + item.file_path}/></td>
+                    <td><img style={{width:120}} src={'http://localhost:8000/' + item.file_path} alt=''/></td>
+                    <td>
+                    <Button onClick={() => deleteProduct(item.id)} variant="danger">Delete</Button>
+                    </td>
                 </tr>
                 )
             }

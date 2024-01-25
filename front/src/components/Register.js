@@ -10,6 +10,7 @@ function Register() {
 
   useEffect(() => {
     if(localStorage.getItem('user-info')) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       navigate('/add')
     }
   }, [])

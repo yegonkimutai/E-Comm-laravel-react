@@ -11,6 +11,7 @@ function Login() {
   
   useEffect(() => {
     if(localStorage.getItem('user-info')) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       navigate('/add')
     }
   }, [])
@@ -35,7 +36,7 @@ function Login() {
       <Header />
       <h1>Login Page</h1>
       <div className='col-sm-6 offset-sm-3'>
-        <input 
+        <input
           className='form-control'
           value={email}
           onChange={e => setEmail(e.target.value)}
