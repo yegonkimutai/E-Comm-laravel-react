@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import { Table, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function List() {
     const[data, setData] = useState([])
@@ -54,7 +55,12 @@ function List() {
                     <td>{item.description}</td>
                     <td><img style={{width:120}} src={'http://localhost:8000/' + item.file_path} alt=''/></td>
                     <td>
-                    <Button onClick={() => deleteProduct(item.id)} variant="danger">Delete</Button>
+                    <Button onClick={() => deleteProduct(item.id)} variant="outline-danger">Delete</Button>
+                    </td>
+                    <td>
+                    <Link to={'update/'+item.id}>
+                    <Button variant="outline-info">Update</Button>
+                    </Link>
                     </td>
                 </tr>
                 )
