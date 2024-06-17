@@ -58,7 +58,7 @@ function List() {
                     <Button onClick={() => deleteProduct(item.id)} variant="outline-danger">Delete</Button>
                     </td>
                     <td>
-                    <Link to={'update/'+item.id}>
+                    <Link to={'update/'}>
                     <Button variant="outline-info">Update</Button>
                     </Link>
                     </td>
